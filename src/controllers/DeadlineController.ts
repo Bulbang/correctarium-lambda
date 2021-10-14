@@ -11,6 +11,7 @@ export class DeadlineController {
       deadline.getHours() > this.workDayBeginning
     ) {
       deadline.setMinutes(30, 0, 0);
+      minutes-=30
     } else deadline.setMinutes(0, 0, 0);
 
     while (deadline.getDay() == 6 || deadline.getDay() == 0) {
@@ -28,12 +29,8 @@ export class DeadlineController {
 
       if (deadline.getHours() >= this.workDayEnd) {
         deadline.setDate(deadline.getDate() + 1);
-        deadline.setHours(
-          this.workDayBeginning,
-          deadline.getMinutes() + 30,
-          0,
-          0
-        );
+        deadline.setHours(this.workDayBeginning);
+        deadline.setMinutes(deadline.getMinutes() + 30, 0, 0);
 
         while (deadline.getDay() == 6 || deadline.getDay() == 0) {
           deadline.setDate(deadline.getDate() + 1);
